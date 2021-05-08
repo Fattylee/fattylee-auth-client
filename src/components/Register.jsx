@@ -14,7 +14,7 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useInputField } from "../hooks/useInputField";
 import { useFormSubmit } from "../hooks/useForm";
 
-export function Register() {
+export function Register(props) {
   const [show, { toggle: handleTogglePassword }] = useBoolean(false);
 
   const [state, handleOnChange, clearFormData] = useInputField({
@@ -25,15 +25,16 @@ export function Register() {
     acceptance: true,
   });
 
-  const { data, isLoading, errors, handleFormSubmit } = useFormSubmit(
+  const { isLoading, errors, handleFormSubmit } = useFormSubmit(
     state,
-    clearFormData
+    clearFormData,
+    props
   );
 
-  console.log("from api", errors);
+  console.log(props, "from api", errors);
   return (
     <>
-      <Box bgColor="#f1f6f8" py="16px">
+      <Box py="16px">
         <Flex justify="center" h="100vh" align="center" direction="column">
           <Box mb="10px">Gloris Signup</Box>
 

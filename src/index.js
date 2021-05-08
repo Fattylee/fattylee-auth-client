@@ -7,6 +7,13 @@ import reportWebVitals from "./reportWebVitals";
 // 1. import `ChakraProvider` component
 import { ChakraProvider } from "@chakra-ui/react";
 
+import axios from "axios";
+
+axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
+axios.defaults.withCredentials = true;
+
+console.log(process.env.REACT_APP_SERVER_DOMAIN);
+
 function Root({ Component }) {
   // 2. Use at the root of your app
   return (

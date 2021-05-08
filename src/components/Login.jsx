@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
 
-import { Box, Center, Flex, Heading, HStack, Text } from "@chakra-ui/layout";
+import { Box, Center, Flex, Heading, Text } from "@chakra-ui/layout";
 import {
   FormControl,
   Input,
-  Checkbox,
   Button,
   InputGroup,
   InputRightElement,
@@ -22,7 +21,7 @@ export function Login() {
     password: "",
   });
 
-  const { data, isLoading, errors, handleFormSubmit } = useFormSubmit(
+  const { isLoading, errors, handleFormSubmit } = useFormSubmit(
     state,
     clearFormData
   );

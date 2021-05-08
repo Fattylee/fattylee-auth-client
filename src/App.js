@@ -11,12 +11,12 @@ function App() {
   return (
     <Router>
       <div>
-        <Box as="nav">
-          <UnorderedList display="flex" justifyContent="space-between">
+        <Box as="nav" bg="blue.800" color="white" shadow="2xl">
+          <UnorderedList display="flex" justifyContent="space-between" mx="8px">
             <ListItem>
               <Link to="/">Home</Link>
             </ListItem>
-            <Flex justify="space-between" sflexGrow="1" flexBasis="30%">
+            <Flex justify="space-between" flexBasis="30%">
               <ListItem>
                 <Link to="/register">Signup</Link>
               </ListItem>
@@ -24,27 +24,20 @@ function App() {
                 <Link to="/login">Login</Link>
               </ListItem>
               <ListItem>
-                <Link to="/users">Users</Link>
+                <Link to="/me">Me</Link>
               </ListItem>
             </Flex>
           </UnorderedList>
         </Box>
 
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/register">
-            <Register />
-          </Route>
+          <Route exact path="/" component={Home} />
+
+          <Route path="/register" component={Register} />
 
           <Route path="/login" component={Login} />
 
-          <Route path="me">
-            <Me />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
+          <Route path="/me" component={Me} />
         </Switch>
       </div>
     </Router>

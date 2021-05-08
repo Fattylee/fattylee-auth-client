@@ -13,10 +13,7 @@ export const useFormSubmit = (inputFieldsState, clearFormData, router) => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-
-    if (inputFieldsState.rememberMe === true) {
-      // perform some logic for rememberMe on the login route
-    }
+    console.log("Sumbitted");
 
     if (inputFieldsState.acceptance === false) {
       setData({
@@ -28,12 +25,12 @@ export const useFormSubmit = (inputFieldsState, clearFormData, router) => {
     }
 
     try {
-      const isSignup = router.pathname === "/signup";
+      const isRegister = router?.history?.location?.pathname === "/register";
 
       setData((s) => ({ ...s, isLoading: true }));
 
       const newUser = await axios.post(
-        `/client/${isSignup ? "signup" : "login"}`,
+        `/${isRegister ? "register" : "login"}`,
         inputFieldsState
       );
 
@@ -46,10 +43,10 @@ export const useFormSubmit = (inputFieldsState, clearFormData, router) => {
 
       toast({
         // adjust toast title for Login
-        title: isSignup ? "Account created." : "Login successful",
+        title: isRegister ? "Account created." : "Login successful",
         // adjust toast description for Login
-        description: isSignup
-          ? "Email verification link has been sent to you, verify your account to complete the  registration process."
+        description: isRegister
+          ? "You can login to your account"
           : "You can now start a project",
         status: "success",
         duration: 5000,
@@ -57,12 +54,10 @@ export const useFormSubmit = (inputFieldsState, clearFormData, router) => {
         position: "top",
       });
 
-      // the team decides about the next rendering
-      router.push(isSignup ? "/login" : "/project");
+      router?.history?.push(isRegister ? "/login" : "/");
 
       if (clearFormData) clearFormData();
     } catch (error) {
-      console.error(error?.response?.data);
       if (error?.message?.toLowerCase().includes("network")) {
         toast({
           title: error.message,
@@ -81,17 +76,6 @@ export const useFormSubmit = (inputFieldsState, clearFormData, router) => {
       }
 
       const errors = error?.response?.data || {};
-
-      // processErrorData
-      if (errors?.message?.toLowerCase().includes("client")) {
-        errors.email = errors.message;
-      }
-      if (errors?.message?.toLowerCase().includes("pending")) {
-        errors.email = errors.message;
-      }
-      if (errors?.message?.toLowerCase().includes("password")) {
-        errors.password = errors.message;
-      }
 
       setData((s) => ({
         ...s,
