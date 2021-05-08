@@ -8,6 +8,7 @@ import reportWebVitals from "./reportWebVitals";
 import { ChakraProvider } from "@chakra-ui/react";
 
 import axios from "axios";
+import { AuthProvider } from "./context/auth";
 
 axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
 axios.defaults.withCredentials = true;
@@ -25,7 +26,9 @@ function Root({ Component }) {
 
 ReactDOM.render(
   <React.StrictMode>
-    <Root Component={App} />
+    <AuthProvider>
+      <Root Component={App} />
+    </AuthProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

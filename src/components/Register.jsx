@@ -13,8 +13,12 @@ import {
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useInputField } from "../hooks/useInputField";
 import { useFormSubmit } from "../hooks/useForm";
+import { useAuthState } from "../context/auth";
 
 export function Register(props) {
+  const { isAuthenticated } = useAuthState();
+  if (isAuthenticated) props.history.push("/me");
+
   const [show, { toggle: handleTogglePassword }] = useBoolean(false);
 
   const [state, handleOnChange, clearFormData] = useInputField({
@@ -31,7 +35,6 @@ export function Register(props) {
     props
   );
 
-  console.log(props, "from api", errors);
   return (
     <>
       <Box py="16px">

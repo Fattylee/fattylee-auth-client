@@ -1,9 +1,11 @@
 import { useToast } from "@chakra-ui/toast";
 import { useState } from "react";
 import axios from "axios";
+import { useAuthDispatch } from "../context/auth";
 
 export const useFormSubmit = (inputFieldsState, clearFormData, router) => {
   const toast = useToast();
+  const dispatch = useAuthDispatch();
 
   const [{ data, isLoading, errors }, setData] = useState({
     data: null,
@@ -13,7 +15,6 @@ export const useFormSubmit = (inputFieldsState, clearFormData, router) => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log("Sumbitted");
 
     if (inputFieldsState.acceptance === false) {
       setData({
@@ -55,6 +56,8 @@ export const useFormSubmit = (inputFieldsState, clearFormData, router) => {
       });
 
       router?.history?.push(isRegister ? "/login" : "/");
+
+      if (!isRegister) dispatch("LOGIN", newUser?.data);
 
       if (clearFormData) clearFormData();
     } catch (error) {
