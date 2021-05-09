@@ -17,7 +17,7 @@ export const NavBar = () => {
   };
 
   return (
-    <Box as="nav" bg="blue.800" color="white" shadow="2xl">
+    <Box as="nav" bg="blue.800" color="white" shadow="2xl" mb="50px">
       <UnorderedList display="flex" justifyContent="space-between" mx="8px">
         <ListItem>
           <Link to="/">Home</Link>

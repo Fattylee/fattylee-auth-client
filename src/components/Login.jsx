@@ -12,12 +12,8 @@ import {
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useInputField } from "../hooks/useInputField";
 import { useFormSubmit } from "../hooks/useForm";
-import { useAuthState } from "../context/auth";
 
 export function Login(props) {
-  const { isAuthenticated } = useAuthState();
-  if (isAuthenticated) props.history.push("/me");
-
   const [show, { toggle: handleTogglePassword }] = useBoolean(false);
 
   const [state, handleOnChange, clearFormData] = useInputField({
@@ -34,7 +30,7 @@ export function Login(props) {
   return (
     <>
       <Box bgColor="#f1f6f8" py="16px">
-        <Flex justify="center" h="100vh" align="center" direction="column">
+        <Flex justify="flex-start" h="100vh" align="center" direction="column">
           <Box mb="10px">Gloris Login</Box>
 
           <Box

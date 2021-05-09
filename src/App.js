@@ -5,22 +5,32 @@ import { Me } from "./components/Me";
 import { Login } from "./components/Login";
 import { Home } from "./components/Home";
 import { Register } from "./components/Register";
-import { Container } from "@chakra-ui/layout";
+import { Container, Square, Text } from "@chakra-ui/layout";
 import { NavBar } from "./components/NavBar";
+import { ProtectedRoute } from "./components/ProtectedRoute";
+import { AuthRoute } from "./components/AuthRoute";
 
 function App() {
   return (
-    <Container>
+    <Container textAlign="center">
       <Router>
         <NavBar />
         <Switch>
           <Route exact path="/" component={Home} />
 
-          <Route path="/register" component={Register} />
+          <AuthRoute path="/register" component={Register} />
 
-          <Route path="/login" component={Login} />
+          <AuthRoute path="/login" component={Login} />
 
-          <Route path="/me" component={Me} />
+          <ProtectedRoute path="/me" component={Me} />
+          <Route
+            path="*"
+            render={() => (
+              <Square>
+                <Text>Not Found</Text>
+              </Square>
+            )}
+          />
         </Switch>
       </Router>
     </Container>

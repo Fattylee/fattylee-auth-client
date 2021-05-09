@@ -3,9 +3,7 @@ import React from "react";
 import { useAuthState } from "../context/auth";
 
 export const Me = (props) => {
-  const { isAuthenticated, user } = useAuthState();
-
-  if (!isAuthenticated) props.history.push("/");
+  const { user } = useAuthState();
 
   const { email, firstName, lastName } = user || {};
 
